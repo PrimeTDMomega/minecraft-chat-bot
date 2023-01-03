@@ -66,6 +66,28 @@ public class MyMinecraftBot {
       } catch (InterruptedException e) {
         // Do nothing
       }
+      if (chatMessage.startsWith("!hunt")) {
+        // Find all nearby mobs of the specified types
+        List<EntityLivingBase> mobs = mc.theWorld.getEntitiesWithinAABB(EntityLivingBase.class, mc.thePlayer.getEntityBoundingBox().expand(10, 10, 10), new Predicate<EntityLivingBase>() {
+          @Override
+          public boolean apply(EntityLivingBase entity) {
+            return (entity instanceof EntityCow || entity instanceof EntityPig || entity instanceof EntitySheep);
+          }
+        });
+        
+        // Attack and kill each mob
+        for (EntityLivingBase mob : mobs) {
+          mc.thePlayer.attackTargetEntityWithCurrentItem(mob);
+          mc.thePlayer.swingItem();
+        }
+        
+        // Collect the drops from the killed mobs
+        for (EntityLivingBase mob : mobs) {
+          for (EntityItem item : mob.capturedDrops) {
+            mc.thePlayer.addToPlayerInventory(item.getEntityItem());
+          }
+        }
+      }      
     }
   }
 }

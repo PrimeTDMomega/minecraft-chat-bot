@@ -11,25 +11,33 @@ public class MyMinecraftBot {
     while (true) {
       // Check if a chat message was received
       if (mc.ingameGUI.getChatGUI().getChatOpen()) {
-        // Get the latest chat message
+        // Get the latest chat message and the username of the sender
         String chatMessage = mc.ingameGUI.getChatGUI().getChatMessage();
+        String sender = mc.ingameGUI.getChatGUI().getSentMessageName();
+        
+        // Check if the chat message starts with "!find"
+        if (chatMessage.startsWith("!find")) {
+          // Find the player with the given username
+          EntityPlayer target = mc.theWorld.getPlayerEntityByName(sender);
+          
+          // Check if the player was found
+          if (target != null) {
+            // Set the bot's target to the player's coordinates
+            mc.thePlayer.setPositionAndUpdate(target.posX, target.posY, target.posZ);
+            
+            // Send a message back to the chat indicating that the bot is following the player
+            String followMessage = "I am now following " + sender + "!";
+            mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + followMessage));
+          } else {
+            // Send a message back to the chat indicating that the player was not found
+            String notFoundMessage = "Could not find player " + sender + "!";
+            mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + notFoundMessage));
+          }
+        }
         
         // Check if the chat message starts with "!coords"
         if (chatMessage.startsWith("!coords")) {
           // Get the bot's current coordinates
           int x = (int) mc.thePlayer.posX;
-          int y = (int) mc.thePlayer.posY;
-          int z = (int) mc.thePlayer.posZ;
-          
-          // Send a message back to the chat with the coordinates
-          String coordMessage = "My coordinates are: " + x + ", " + y + ", " + z;
-          mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + coordMessage));
-        }
-      }
-      
-      // Sleep for a short time before checking for new chat messages again
-      try {
-        Thread.sleep(1000);
-      } catch (InterruptedException e) {
-        // Do nothing
-      }
+          int y = (int) mc.the
+

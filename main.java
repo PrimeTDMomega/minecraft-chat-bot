@@ -38,6 +38,22 @@ public class MyMinecraftBot {
         // Check if the chat message starts with "!coords"
         if (chatMessage.startsWith("!coords")) {
           // Get the bot's current coordinates
-          int x = (int) mc.thePlayer.posX;
-          int y = (int) mc.the
-
+          double x = mc.thePlayer.posX;
+          double y = mc.thePlayer.posY;
+          double z = mc.thePlayer.posZ;
+          
+          // Send a message back to the chat with the bot's current coordinates
+          String coordsMessage = "I am currently at (" + x + ", " + y + ", " + z + ")";
+          mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + coordsMessage));
+        }
+      }
+      
+      // Sleep for a short time before checking for new chat messages again
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        // Do nothing
+      }
+    }
+  }
+}

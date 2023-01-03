@@ -1,3 +1,8 @@
+// Go here - https://raw.githubusercontent.com/WitheredKnights/resourcePack-Tutorial/main/pack.png
+
+
+
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -45,6 +50,13 @@ public class MyMinecraftBot {
           // Send a message back to the chat with the bot's current coordinates
           String coordsMessage = "I am currently at (" + x + ", " + y + ", " + z + ")";
           mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + coordsMessage));
+        }
+        
+        // Check if the chat message starts with "!tpa"
+        if (chatMessage.startsWith("!tpa")) {
+          // Send the message "/tpa [PLAYER_NAME]" to the chat
+          String tpaMessage = "/tpa " + sender;
+          mc.thePlayer.sendChatMessage(tpaMessage);
         }
       }
       

@@ -60,11 +60,12 @@ public class MyMinecraftBot {
         
         // Check if the chat message starts with "!tpa"
         if (chatMessage.startsWith("!tpa")) {
-          // Send the message "/tpa [PLAYER_NAME]" to the chat
-          String tpaMessage = "/tpa " + sender;
-          mc.thePlayer.sendChatMessage(tpaMessage);
-        }
-      }
+  String[] messageParts = chatMessage.split(" ");
+  if (messageParts.length >= 2) {
+    String targetName = messageParts[1];
+    mc.thePlayer.sendChatMessage("/tpa " + targetName);
+  }
+}
       
       // Sleep for a short time before checking for new chat messages again
       try {

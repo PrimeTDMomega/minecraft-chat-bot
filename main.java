@@ -3,9 +3,12 @@
 
 
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
+import java.util.List;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Predicate;
+
 
 public class MyMinecraftBot {
   public static void main(String[] args) {
